@@ -1,6 +1,5 @@
-function hello() {
-    for (let index = 0; index < array.length; index++) {
-        const element = array[index];
-
-    }
+var x = 3;
+while (x < 10000) {
+    x *= 3;
+    console.log(x);
 }
