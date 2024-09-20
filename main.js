@@ -89,6 +89,21 @@ while (remainingLetters > 0) {
 }
 showAnswerAndCongratulatePlayer(answerArray)
 */
-for (var i = 1; i < 6; i++)
-    $('h1').hide(1000 * i).show(1000 * i)
-
+$('#block').hide(0)
+function showBlock() {
+    if ($('#block').is(':hidden')) {
+        $('#block').show(1500)
+    }
+    else {
+        $('#block').hide(1500)
+    }
+}
+function changeText() {
+    var buttText = $('#butt').text()
+    if (buttText == 'Show') {
+        $('#butt').text('Hide')
+    }
+    else {
+        $('#butt').text('Show')
+    }
+}
