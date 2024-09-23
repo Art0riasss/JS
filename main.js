@@ -89,21 +89,44 @@ while (remainingLetters > 0) {
 }
 showAnswerAndCongratulatePlayer(answerArray)
 */
-$('#block').hide(0)
-function showBlock() {
-    if ($('#block').is(':hidden')) {
-        $('#block').show(1500)
-    }
-    else {
-        $('#block').hide(1500)
-    }
-}
-function changeText() {
-    var buttText = $('#butt').text()
-    if (buttText == 'Show') {
-        $('#butt').text('Hide')
-    }
-    else {
-        $('#butt').text('Show')
+var height = 800
+var width = 800
+var click = 0
+function distanceHint(distance) {
+    if (distance < 20) {
+        return 'very hot'
+    } else if (distance < 50) {
+        return 'hot'
+    } else if (distance < 120) {
+        return 'good'
+    } else if (distance < 220) {
+        return 'cold'
+    } else if (distance < 450) {
+        return 'very cold'
     }
 }
+function getDistance(event, target) {
+    var diffX = event.offsetX - target.x
+    var diffY = event.offsetY - target.y
+    return Math.sqrt((diffX * diffX) + (diffY * diffY))
+}
+function randomValue(number) {
+    return Math.floor(Math.random() * number)
+}
+var target = {
+    x: randomValue(width),
+    y: randomValue(height)
+}
+$('#map').click(function (event) {
+    click++
+    if (click > 20) {
+        alert("you lose!!!!!")
+    } else {
+        var distance = getDistance(event, target)
+        var hint = distanceHint(distance)
+        $('#distance').text(hint)
+        if (distance < 16) {
+            alert('congrats you won 1000$')
+        }
+    }
+})
