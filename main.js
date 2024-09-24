@@ -88,10 +88,11 @@ while (remainingLetters > 0) {
     }
 }
 showAnswerAndCongratulatePlayer(answerArray)
-*/
+
 var height = 800
 var width = 800
 var click = 0
+var remainClicks = 20
 function distanceHint(distance) {
     if (distance < 20) {
         return 'very hot'
@@ -119,6 +120,7 @@ var target = {
 }
 $('#map').click(function (event) {
     click++
+    $('#clicks').text(remainClicks--)
     if (click > 20) {
         alert("you lose!!!!!")
     } else {
@@ -129,4 +131,33 @@ $('#map').click(function (event) {
             alert('congrats you won 1000$')
         }
     }
+})
+*/
+
+var leftOffset = 0;
+var topOffset = 0;
+
+function moveSquare() {
+    $('#distance').offset({
+        left: leftOffset,
+        top: topOffset
+    })
+    if (leftOffset == 0 && topOffset < 200) {
+        topOffset++
+    } else if (topOffset == 200 && leftOffset < 200) {
+        leftOffset++
+    } else if (topOffset > 0 && leftOffset == 200) {
+        topOffset--
+    } else if (topOffset == 0 && leftOffset > 0) {
+        leftOffset--
+    }
+}
+function fade() {
+    $('#distance').fadeOut(500).fadeIn(500)
+}
+
+var idIinterval = setInterval(moveSquare, 1)
+setInterval(fade, 1)
+$('#clicks').click(function () {
+    clearInterval(idIinterval)
 })
