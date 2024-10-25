@@ -132,11 +132,11 @@ $('#map').click(function (event) {
         }
     }
 })
-*/
 
 var leftOffset = 0;
 var topOffset = 0;
-
+var click = 0
+var clicks = 0
 function moveSquare() {
     $('#distance').offset({
         left: leftOffset,
@@ -156,8 +156,69 @@ function fade() {
     $('#distance').fadeOut(500).fadeIn(500)
 }
 
-var idIinterval = setInterval(moveSquare, 1)
-setInterval(fade, 1)
-$('#clicks').click(function () {
-    clearInterval(idIinterval)
+var idSSS = setInterval(moveSquare, 100)
+$('#distance').click(function () {
+    click += 10
+    clicks++
+    clearInterval(idSSS)
+    var idSSS = setInterval(moveSquare, (100 - click))
+    $('#distance').text(clicks)
+    if (clicks > 10) {
+        $('#distance').text('you won')
+        clearInterval(idSSS)
+    }
 })
+    */
+function Car(x, y,) {
+    this.x = x
+    this.y = y
+    this.draw()
+}
+Car.prototype.draw = function () {
+    var carHTML = '<img src="https://i1.sndcdn.com/artworks-JCRzKrItB0MBG0eI-oSMIiw-t200x200.jpg"></img>'
+    this.carElement = $(carHTML)
+    this.carElement.css({
+        position: "absolute",
+        left: this.x,
+        top: this.y
+    })
+    $('body').append(this.carElement)
+}
+Car.prototype.moveRight = function (distance) {
+    this.x += distance
+    this.carElement.css({
+        left: this.x,
+        top: this.y
+    })
+}
+Car.prototype.moveLeft = function (distance) {
+    this.x -= distance
+    this.carElement.css({
+        left: this.x,
+        top: this.y
+    })
+}
+Car.prototype.moveTop = function (distance) {
+    this.y -= distance
+    this.carElement.css({
+        left: this.x,
+        top: this.y
+    })
+}
+Car.prototype.moveDown = function (distance) {
+    this.y += distance
+    this.carElement.css({
+        left: this.x,
+        top: this.y
+    })
+}
+var tesla = new Car(20, 20)
+var nissan = new Car(20, 220)
+function teslaMove() {
+    tesla.moveRight(Math.floor(Math.random() * 5))
+}
+function nissanMove() {
+    nissan.moveRight(Math.floor(Math.random() * 5))
+}
+setInterval(teslaMove, 10)
+setInterval(nissanMove, 10)

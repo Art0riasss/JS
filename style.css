@@ -1,1 +1,9 @@
 * {}
+
+#distance:hover {
+    cursor: pointer;
+}
+
+#distance {
+    padding: 100px;
+}
